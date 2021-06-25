@@ -14,6 +14,7 @@ import {
 	PORT,
 	K8S,
 	PROJECT_NAME,
+	SERVER_PORT,
 } from './environment';
 import * as db from './database';
 import { seed } from './seed-data/seed';
@@ -78,9 +79,9 @@ module.exports = () => {
 	return Promise.all([dbConnect(), initApi()])
 		.then((e) => {
 			server.setTimeout(7200000);
-			server.listen(PORT, (err) => {
+			server.listen(SERVER_PORT, (err) => {
 				if (err) throw err;
-				console.log(`${PROJECT_NAME} server is listening on port ${PORT}`);
+				console.log(`${PROJECT_NAME} server is listening on port ${SERVER_PORT}`);
 				console.log(new Date());
 			});
 		})

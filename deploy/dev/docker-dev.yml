@@ -1,7 +1,7 @@
 version: '3.3'
 networks:
-  dev:
-    name: dev
+  wi-chat:
+    name: wi-chat
 services:
   mongo-express:
     image: mongo-express
@@ -16,7 +16,7 @@ services:
     depends_on:
       - mongo
     networks:
-      - dev
+      - wi-chat
   mongo:
     image: mongo
     restart: always
@@ -32,7 +32,7 @@ services:
       - ./init-mongo.sh:/docker-entrypoint-initdb.d/mongo-init.sh
     command: --port ${MONGODB_PORT}
     networks:
-      - dev
+      - wi-chat
     ports:
       - ${MONGODB_PORT}:${MONGODB_PORT}
   server:
@@ -45,7 +45,7 @@ services:
           memory: ${MEMORY_LIMIT}
         reservations:
           memory: ${MEMORY_RESERVATIONS}
-    image: nftjapan/nft-japan-server:dev
+    image: wi-chat:dev
     build:
       context: ../../
       dockerfile: Dockerfile
@@ -91,12 +91,10 @@ services:
     ports:
       - ${SERVER_PORT}:${SERVER_PORT}
       - 9229:9229
-    extra_hosts:
-      - 'dockerhost:host-gateway'
     depends_on:
       - mongo
     networks:
-      - dev
+      - wi-chat
     restart: always
     extra_hosts:
       - "dockerhost:host-gateway"
