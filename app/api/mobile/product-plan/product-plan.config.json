@@ -1,0 +1,167 @@
+{
+  "seeding" : {
+    "path": "seeding",
+    "populate": {
+      "path": "species"
+    }
+  },
+  "planting": {
+    "path": "planting",
+    "populate": {
+      "path": "species"
+    }
+  },
+  "comment": {
+    "path": "comments",
+    "select": [
+      "firstName",
+      "lastName"
+    ]
+  },
+  "createdBy":{
+    "path": "createdBy",
+    "select": [
+      "firstName",
+      "lastName"
+    ],
+    "populate": {
+      "path": "createdBy"
+    }
+  },
+  "packing": {
+    "path": "packing",
+    "populate": [
+      {
+        "path": "packing"
+      },
+      {
+        "path": "sampleImage.takenBy",
+        "select": [
+          "username",
+          "firstName",
+          "lastName",
+          "fullName"
+        ]
+      },
+      {
+        "path": "packingImage.takenBy",
+        "select": [
+          "username",
+          "firstName",
+          "lastName",
+          "fullName"
+        ]
+      }
+    ]
+  },
+  "preservation" : {
+    "path": "preservation",
+    "populate": [
+      {
+        "path": "storageImage.takenBy",
+        "select": [
+          "username",
+          "firstName",
+          "lastName",
+          "fullName"
+        ]
+      }
+    ]
+  },
+  "cleaning" : {
+    "path": "cleaning",
+    "populate": [
+      {
+        "path": "imageBefore.takenBy",
+        "select": [
+          "username",
+          "firstName",
+          "lastName",
+          "fullName"
+        ]
+      },
+      {
+        "path": "imageInProgress.takenBy",
+        "select": [
+          "username",
+          "firstName",
+          "lastName",
+          "fullName"
+        ]
+      },
+      {
+        "path": "imageAfter.takenBy",
+        "select": [
+          "username",
+          "firstName",
+          "lastName",
+          "fullName"
+        ]
+      }
+    ]
+  },
+  "preliminaryTreatment" : {
+    "path": "preliminaryTreatment",
+    "populate": [
+      {
+        "path": "imageBefore.takenBy",
+        "select": [
+          "username",
+          "firstName",
+          "lastName",
+          "fullName"
+        ]
+      },
+      {
+        "path": "imageInProgress.takenBy",
+        "select": [
+          "username",
+          "firstName",
+          "lastName",
+          "fullName"
+        ]
+      },
+      {
+        "path": "imageAfter.takenBy",
+        "select": [
+          "username",
+          "firstName",
+          "lastName",
+          "fullName"
+        ]
+      }
+    ]
+  },
+  "harvesting": {
+    "path": "harvesting",
+    "populate": [
+      {
+        "path": "imageBefore.takenBy",
+        "select": [
+          "username",
+          "firstName",
+          "lastName",
+          "fullName"
+        ]
+      },
+      {
+        "path": "imageInProgress.takenBy",
+        "select": [
+          "username",
+          "firstName",
+          "lastName",
+          "fullName"
+        ]
+      },
+      {
+        "path": "imageAfter.takenBy",
+        "select": [
+          "username",
+          "firstName",
+          "lastName",
+          "fullName"
+        ]
+      }
+    ]
+  }
+}

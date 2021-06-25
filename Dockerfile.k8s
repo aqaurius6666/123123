@@ -1,0 +1,31 @@
+FROM node:15.14-alpine3.10 AS builder
+
+WORKDIR /app
+
+RUN apk --no-cache add \
+    g++ make python git \
+    && rm -rf /var/cache/apk/*
+
+COPY package.json yarn*.lock /app/
+
+RUN yarn --pure-lockfile
+
+
+# Runtime image from here
+FROM bitnami/node:13
+
+WORKDIR /app
+
+RUN apt-get update
+
+RUN apt-get install bash ghostscript graphicsmagick -y
+
+RUN yarn global add nodemon
+
+COPY ./.babelrc .
+
+COPY --from=builder /app .
+
+COPY ./app ./app
+
+RUN chmod 777 /app
