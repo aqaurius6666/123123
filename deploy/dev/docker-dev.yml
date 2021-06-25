@@ -35,15 +35,6 @@ services:
       - dev
     ports:
       - ${MONGODB_PORT}:${MONGODB_PORT}
-  stripe:
-    image: stripe/stripe-cli
-    restart: always
-    environment:
-      - STRIPE_DEVICE_NAME
-      - STRIPE_API_KEY
-    command: listen --forward-to ${SERVER_WEBHOOK_URL}
-    networks:
-      - dev
   server:
     #    extends:
     #      file: docker-compose.yml

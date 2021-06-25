@@ -56,7 +56,7 @@ const clearNewMessage = async (body) => {
 
   return NewMessage.remove({ conservation: conservationId, user: userId });
 };
-const addToConservation = async ({}) => {};
+const shouldSendTelegram = async ({}) => {};
 module.exports = {
   validateMessage,
   validateSeenMessage,

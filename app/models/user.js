@@ -54,29 +54,10 @@ const UserSchema = new Schema(
 			ref: 'Role',
 			required: true,
 		},
-		walletKey: {
+		color: {
 			type: String,
-			required: true,
-		},
-		walletAddress: {
-			type: String,
-			required: true,
-		},
-		activeCode: {
-			type: String,
-			default: '',
-		},
-		expireDate: {
-			type: Date,
-			default: new Date(new Date().getTime() + 5 * 60000),
-		},
-		isActive: {
-			type: Boolean,
-			default: false,
-		},
-		coler: {
-			type: String,
-			require: true
+			require: true,
+			default: '1'
 		}
 	},
 	{ timestamps: true }

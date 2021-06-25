@@ -14,12 +14,9 @@ import {
 	PORT,
 	K8S,
 	PROJECT_NAME,
-	BLOCKCHAIN_URL,
 } from './environment';
 import * as db from './database';
 import { seed } from './seed-data/seed';
-import { generateMapping } from './api/library/getLatestChap';
-import { ping } from './utils/blockchain-utils';
 
 const cors = require('cors');
 const bodyParser = require('body-parser');
@@ -29,22 +26,15 @@ const app = express();
 const server = require('http').Server(app);
 const fs = require('fs');
 
-const getMongoUri = () => {
-  return `mongodb://${MONGODB_USER}:${MONGODB_PASS}@${SERVICE_NAME}.${NAMESPACE}/${MONGODB_DATABASE}?replicaSet=${MONGODB_REPLICASET}`
-}
 
 module.exports = () => {
 	console.log('Bootstrap starting time', new Date());
 	let urlConnection = `mongodb://${MONGODB_USER}:${MONGODB_PASS}@${MONGODB_URL}:${MONGODB_PORT}/${MONGODB_DATABASE}`;
-	if (K8S === 'true') {
-		urlConnection = getMongoUri()
-	}
 	console.log(urlConnection);
 	const errMes = {};
 	if (!fs.existsSync('uploads')) {
 		fs.mkdirSync('uploads');
 	}
-
 	const dbConnect = () =>
 		db
 			.connect(urlConnection)
@@ -54,7 +44,6 @@ module.exports = () => {
 					.then(() => {
 						console.log('Seed success!');
 					})
-					.then(generateMapping)
 					.catch((e) => {
 						console.log('Seed error', e.stack);
 						errMes.e = e.stack;
@@ -75,7 +64,6 @@ module.exports = () => {
 		app.use(bodyParser.urlencoded({ extended: false }));
 		app.use(cookieParser());
 		app.use(API_PREFIX, require('./api'));
-		app.use('/', require('./api/client/payment/payment.webhook'));
 		app.use('/mobile/build', express.static(`${__dirname}/../mobile/build`));
 		app.use('/uploads', express.static(`${__dirname}/../uploads`));
 		app.use(express.static(`${__dirname}/../deploy/build`));
